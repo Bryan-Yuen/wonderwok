@@ -1,0 +1,68 @@
+h1 {
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.gallery-container{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(300px, 400px));
+  grid-gap: 50px;
+  justify-content: center;
+  padding-bottom: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.gallery-container img{
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /*padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.85); /* Black w/ opacity */
+}
+
+.modal-content {
+  /*margin: auto;*/
+  display: block;
+  width: 80%; /* Pretty much gives you mmargins*/
+  max-width: 700px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 815px) {
+  .gallery-container{
+    grid-template-columns: auto;
+  }
+}

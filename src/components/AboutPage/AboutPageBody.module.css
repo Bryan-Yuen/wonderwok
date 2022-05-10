@@ -1,0 +1,106 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hours-and-location-picture, .hours-and-location-container {
+  background-color: rgb(236, 236, 236);
+}
+
+.about-container, .hours-and-location-container {
+  display: flex;
+  align-items: center;
+}
+
+.about-container {
+  margin-left: auto;
+  padding-left:25px;
+  padding-right: 25px;
+}
+
+
+.hours-and-location-container {
+  margin-right:auto;
+  padding-right: 25px;
+  padding-left: 25px;
+  width: 100%;
+}
+
+.about-content, .hours-and-location-content {
+  max-width: 450px;
+}
+
+.about-picture img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin-right: auto;
+  padding: 25px;
+
+}
+
+.hours-and-location-picture img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  padding: 25px;
+}
+
+
+.container ul {
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.container p , .container ul{
+  line-height: 1.5;
+}
+
+
+/*height and wid 1100% makes it responsive but we need a container so we can set an inital size to begin with
+if we don't it'll just take up the full size of the parent container*/
+
+.container .map-container {
+  overflow:hidden;
+  position:relative;
+  height: 500px;
+  grid-column: span 2;
+  display:flex;
+  justify-content: center;
+}
+
+.container iframe {
+  padding:25px;
+  height:500px;
+  width:100%;
+  position:absolute;
+  left:0;
+  top:0;
+}
+
+
+@media (max-width: 815px) {
+  .container {
+    display: block;
+  }
+
+  .about-container, .hours-and-location-container{
+    justify-content: center;
+  }
+
+  .about-container{
+    padding-top: 25px;
+  }
+
+  .hours-and-location-container {
+    padding-bottom: 25px;
+  }
+
+  .about-picture img, .hours-and-location-picture img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

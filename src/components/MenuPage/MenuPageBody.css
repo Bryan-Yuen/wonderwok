@@ -1,0 +1,295 @@
+/* seperate the css into sections or different files probably sections later */
+
+.menupage-container{
+  background-color: rgb(230, 230, 230);
+  display: flex;
+  justify-content: center;
+}
+
+.menupage-container .sidebar {
+  position: sticky;
+  align-self: flex-start;
+  
+  /*
+  margin-top: 20px;
+  */
+  /* symmetry with the menubody margins */
+  padding-top: 20px;
+  padding-left: 25px;
+  top: 0px;
+}
+
+/* to fix the shaking when the front turns bold and stretches the width*/
+.menupage-container .sidebar .topBarList {
+  width: 300px;
+}
+
+/* remove bullet points */
+.menupage-container .sidebar ul{
+  list-style-type: none;
+}
+
+.menupage-container .sidebar li{
+  margin: 15px 0;
+}
+
+.menupage-container .sidebar button{
+  font-size: 20px;
+  text-align: left;
+  background-color: inherit;
+  border-style: none;
+  color: black;
+  
+}
+
+.menupage-container .sidebar button:hover {
+  /*text-decoration: underline;*/
+  cursor: pointer;
+  /*border-bottom: 3px solid black transparent;*/
+  font-weight: bold;
+}
+
+/* this class isn't specific enought i think and they are other more sepcific classes that are more specific
+that are dominating so you need !import if something above already set the style */
+.active {
+  /*text-decoration: underline !important;*/
+  border-bottom: 3px solid black !important;
+  font-weight: bold;
+}
+
+
+.menupage-container .sidebar .sideBar-button {
+  display: none;
+}
+
+.menupage-container .sidebar .popup-menuCategories{
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #a11212;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+
+
+.menupage-container .menupage-body h1{
+  text-align: center;
+  /*
+  padding: 20px 0;
+  */
+  margin: 20px 0;
+}
+
+.menupage-container .menupage-body h2{
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  /*
+  padding-bottom: 20px;
+  padding-top: 40px;
+  */
+}
+
+/*I think using padding shrinks the width */
+.menupage-container .menupage-body {
+  max-width: 600px;
+  /*
+  padding-left: 50px;
+  padding-right: 50px;
+  */
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+/*
+.menupage-container .table-container {
+  width: 600px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+*/
+
+.menupage-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.menupage-container table .ptQtJumboColumnWidth {
+  width: 85px;
+}
+
+.menupage-container table td:not(:first-child), .menupage-container table th:not(:first-child){
+  padding-left: 10px;
+}
+
+.menupage-container tr {
+  border-bottom: 1px solid rgb(44, 42, 42);
+}
+
+.menupage-container td {
+  padding: 10px 0;
+}
+
+.menupage-container td:nth-child(n + 2) {
+  text-align: right;
+}
+
+.menupage-container th:nth-child(n + 2) {
+  text-align: right;
+}
+
+.menupage-container p {
+  text-align: center;
+}
+
+.menupage-container .familySpecialPrice {
+  vertical-align: bottom;
+}
+
+.menupage-container .menupage-body ul {
+  list-style-position: inside;
+}
+
+.menupage-container .menupage-body li{
+  text-indent: -20px;
+  padding-left: 20px;
+}
+
+.menupage-container .menupage-body li:not(:last-child) {
+  margin: 10px 0;
+}
+
+/*padding at bottom and line up with sidebar last line*/
+.menupage-container .menupage-body .table-container:last-child {
+  padding-bottom: 65px;
+}
+
+/*750 was before but we want a smaller one probably 700*/
+@media (max-width: 815px), (max-height: 700px) {
+  .menupage-container{
+    display: block;
+  }
+
+  .menupage-container .menupagebody-filler {
+    display:none;
+  }
+
+  .menupage-container .menupage-body {
+    margin:auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  /* side barrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr */
+  .menupage-container .sidebar h2 {
+    display: none;
+  }
+
+  /*
+  .menupage-container .sidebar {
+    overflow: auto;
+    white-space: nowrap;
+    top: 0;
+    background-color: white;
+    padding-top: 0;
+  }
+  */
+  
+
+  .menupage-container .sidebar ul {
+    margin: 10px 0;
+  }
+
+  .menupage-container .sidebar li{
+    display: inline-block;
+    margin: 0px 15px;
+  }
+
+  
+  .menupage-container .sidebar button {
+    background-color: rgb(220, 220, 220);
+  }
+
+  .menupage-container .sidebar .sideBar-button {
+    display: inline-block;
+    padding: 0 10px;
+    background-color: rgb(220, 220, 220);
+  }
+
+  .menupage-container .sidebar {
+    padding: 0;
+    border-bottom: 1px solid rgb(126, 126, 126);
+  }
+
+  .menupage-container .topBar {
+    display: flex;
+  }
+
+  
+  .menupage-container .sidebar .topBarList {
+    overflow: auto;
+    white-space: nowrap;
+    top: 0;
+    /*background-color: rgb(210, 210, 210);*/
+    background-color: rgb(220, 220, 220);
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    width: auto;
+  }
+
+  .menupage-container .sidebar .topBarList::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .menupage-container .sidebar .topBarList::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  .menupage-container .sidebar .topBarList::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  .menupage-container .sidebar .topBarList::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  /* why the fuck did we put this in the other thing
+  position: relative;
+    top: 10%;
+  */
+  .menupage-container .sidebar .popup-menuCategories ul {
+    margin: 100px 0;
+  }
+
+  .menupage-container .sidebar .popup-menuCategories li{
+    display: block;
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  .menupage-container .sidebar .popup-menuCategories button{
+    color:white;
+    background-color:#a11212;
+  }
+
+  .menupage-container .sidebar .popup-menuCategories button .close{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 60px;
+    color:white;
+    background-color:#a11212;
+    border: none;
+    cursor: pointer;
+  }
+
+}
