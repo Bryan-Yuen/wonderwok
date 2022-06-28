@@ -59,7 +59,8 @@ export default function SideBar(props) {
             <ul>
             {categories.map((cat, i) =>
               <li>
-                <button onClick={() => scroll(i)} ref={i === props.activeIndex ? props.activeSlideRef : el => props.categoriesRefs.current[i] = el}>{cat}</button>
+                <button onClick={() => scroll(i)} ref={el => props.categoriesRefs.current[i] = el}>{cat}</button>
+                {/*<button onClick={() => scroll(i)} ref={i === props.activeIndex ? props.activeSlideRef : el => props.categoriesRefs.current[i] = el}>{cat}</button>*/}
               </li>
             )}
             </ul>

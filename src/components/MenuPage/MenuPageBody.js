@@ -47,7 +47,8 @@ export default function MenuPageBody() {
     //setMenuCategories(sideBar.current.querySelectorAll("a"))
     console.log('im going to print isitphone // screensizeboolean');
     console.log(screenSizeBoolean);
-    activeSlideRef.current.classList.add(styles['active']);
+
+    categoriesRefs.current[activeIndexRef.current].classList.add(styles['active']);
     //activeSlideRef.current.classList.add("active")
     console.log(headerRefs.current);
     // callback gets called everytime there is a change in intersection either from 0 or 1
@@ -106,10 +107,16 @@ export default function MenuPageBody() {
 
         if (localActiveIndex !== activeIndexRef.current) {
           console.log('im in setstate');
-          activeSlideRef.current.classList.remove(styles['active']);
+          console.log("111")
+          console.log(categoriesRefs.current[activeIndexRef.current])
+          categoriesRefs.current[activeIndexRef.current].classList.remove(styles['active']);
+          //activeSlideRef.current.classList.remove(styles['active']);
           //activeSlideRef.current.classList.remove("active")
           setActiveIndex(localActiveIndex);
-          activeSlideRef.current.classList.add(styles['active']);
+          console.log("222")
+          console.log(categoriesRefs.current[activeIndexRef.current])
+          categoriesRefs.current[activeIndexRef.current].classList.add(styles['active']);
+          //activeSlideRef.current.classList.add(styles['active']);
           //activeSlideRef.current.classList.add("active")
         }
       },
@@ -138,25 +145,13 @@ export default function MenuPageBody() {
   //maybe stop the first render ask stack overflow
   //This may be firing when screen is big and it doesnt have scrollbar yet but it doesnt break the code
   useEffect(() => {
-    //categoriesRefs.current[activeIndex].scrollIntoView({behavior: "smooth", inline: "start"})
-    /*
-    console.log("what is this " + categoriesRefs.current[activeIndex])
-    if(categoriesRefs.current[activeIndex] !== undefined)
+    // only thing i may worry about is whether to check if categoriesRefs.current[activeIndexRef.current]
+    // is null or undefined on first cast with if statement
+    if(isItPhone)
     {
-      sideBar.current.scrollTo({left: categoriesRefs.current[activeIndex].offsetLeft, behavior: "smooth"})
-      console.log("heiiiiiiiiiiii//////////////////")
-      console.log(categoriesRefs.current[activeIndex])
-    }
-    */
-    if (activeSlideRef.current) {
-      console.log('im being trigereddddddddddddddddddddddd');
-      console.log(activeSlideRef.current);
-      //activeSlideRef.current.scrollIntoView({behavior: "smooth"})
-      // 15 + 63, 63 is button length 20 is for margins
-      console.log('guy');
-      console.log(activeSlideRef.current.offsetLeft);
+      console.log("fired")
       sideBar.current.scrollTo({
-        left: activeSlideRef.current.offsetLeft - 78,
+        left: categoriesRefs.current[activeIndexRef.current].offsetLeft - 78,
         behavior: 'smooth',
       });
     }
