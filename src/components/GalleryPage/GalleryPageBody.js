@@ -34,18 +34,18 @@ export default function GalleryPageBody() {
   return (
     <>
       <h1>Gallery</h1>
-      <div class={styles['gallery-container']}>
+      <div className={styles['gallery-container']}>
         {pictureNames.map((name) => (
           <img src={images[name]} onClick={() => selectImage(name)}></img>
         ))}
       </div>
-      <div class={styles['modal']} style={{ display: display }} onClick={close}>
-        <span class={styles['close']} onClick={() => close()}>
+      <div className={styles['modal']} style={{ display: display }} onClick={close}>
+        <span className={styles['close']} onClick={() => close()}>
           &times;
         </span>
         <img
           src={images[modalImage]}
-          class={styles['modal-content']}
+          className={styles['modal-content']}
           onClick={(e) => {
             // do not close modal if anything inside modal content is clicked
             e.stopPropagation();

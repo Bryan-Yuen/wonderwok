@@ -4,9 +4,9 @@ import styles from "./HomePageBody.module.css";
 
 export default function HomePageBody() {
   return (
-    <section class={styles["picture-container"]}>
+    <section className={styles["picture-container"]}>
       <picture>
-        <img src={homePagePicture}></img>
+        <img src={homePagePicture} alt="Orange chicken"></img>
       </picture>
       <a href="Menu">View Menu</a>
     </section>

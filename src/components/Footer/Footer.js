@@ -4,8 +4,8 @@ import styles from "./Footer.module.css";
 export default function Footer() {
   return (
     // This is not redundant div containers, I need 2 flex so I can changethe child div to display block later
-    <footer class={styles["footer-container"]}>
-      <div class={styles["footer-content"]}>
+    <footer className={styles["footer-container"]}>
+      <div className={styles["footer-content"]}>
         <p>
           <b>Phone Number</b>
           <br></br>

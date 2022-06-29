@@ -7,9 +7,9 @@ import SecondPic from "../../pictures/gallery_pictures/img2.jpg";
 // just use a variable with bracket styling and put html in javascript
 export default function InfoPageBody() {
   return (
-    <div class={styles['container']}>
-      <div class={styles['about-container']}>
-        <div class={styles['about-content']}>
+    <div className={styles['container']}>
+      <div className={styles['about-container']}>
+        <div className={styles['about-content']}>
           <p>
             <b>About</b>
             <br></br>
@@ -32,14 +32,14 @@ export default function InfoPageBody() {
           </ul>
         </div>
       </div>
-      <div class={styles['about-picture']}>
-        <img src={WonderWokPicture}></img>
+      <div className={styles['about-picture']}>
+        <img src={WonderWokPicture} alt="outside of restaurant"></img>
       </div>
-      <div class={styles['hours-and-location-picture']}>
-        <img src={SecondPic}></img>
+      <div className={styles['hours-and-location-picture']}>
+        <img src={SecondPic} alt="inside of restaurant"></img>
       </div>
-      <div class={styles['hours-and-location-container']}>
-        <div class={styles['hours-and-location-content']}>
+      <div className={styles['hours-and-location-container']}>
+        <div className={styles['hours-and-location-content']}>
           <p>
             <b>Hours</b>
             <br></br>
@@ -58,7 +58,7 @@ export default function InfoPageBody() {
           </p>
         </div>
       </div>
-      <div class={styles["map-container"]}>
+      <div className={styles["map-container"]}>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4376.220615281892!2d-80.20730518497476!3d25.97089518354223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9aebe6f7bb9fd%3A0x1904ac541b0350ce!2sWonder%20Wok!5e1!3m2!1sen!2sus!4v1645939823863!5m2!1sen!2sus"
           width="1000"
@@ -66,6 +66,7 @@ export default function InfoPageBody() {
           style={{ border: 0 }}
           allowfullscreen=""
           loading="lazy"
+          title="Google Maps of Restaurant"
         ></iframe>
       </div>
     </div>

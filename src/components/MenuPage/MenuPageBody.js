@@ -1,54 +1,42 @@
 import styles from './MenuPageBody.module.css';
-//import './MenuPageBody.css'
 import SideBar from './SideBar';
 import Menu from './Menu';
-import * as menu from '../../menu_items/MenuExports.js';
 import { useRef, useEffect, useState } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 import { useMediaQuery } from 'react-responsive';
 
-/* you can do some hover styling don't forget*/
 export default function MenuPageBody() {
   const menuRef = useRef(null);
   const sideBar = useRef(null);
-  const activeSlideRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
   const headerRefs = useRef([]);
   const categoriesRefs = useRef([]);
   headerRefs.current = new Array(16);
   categoriesRefs.current = new Array(16);
-  const [screenSizeBoolean, setScreenSizeBoolean] = useState();
 
   activeIndexRef.current = activeIndex;
 
   smoothscroll.polyfill();
 
-  const handleMediaQueryChange = (matches) => {
-    // matches will be true or false based on the value for the media query
-    setScreenSizeBoolean(matches);
-    console.log('screen changed');
-    console.log(matches);
-  };
-
-  // i can just hardcode it and assume the user will just load with their screen size and won't change but this use case
-  // is for the 1% change it does happen and the user changes their screen for some reason
+  // isItPhone will change to true or false whenever the screen changes past 815px width in either direction
   const isItPhone = useMediaQuery(
-    { maxWidth: 815 },
-    undefined,
-    handleMediaQueryChange
+    { maxWidth: 815 }
   );
 
-  //const [menuCategories, setMenuCategories] = useState()
-
+  // when you put this logic in a seperate file, just have the sidebar expose the ref or pass in the ref a parameter to custom hook 
   useEffect(() => {
-    //setMenuCategories(sideBar.current.querySelectorAll("a"))
-    console.log('im going to print isitphone // screensizeboolean');
-    console.log(screenSizeBoolean);
-    activeSlideRef.current.classList.add(styles['active']);
-    //activeSlideRef.current.classList.add("active")
-    console.log(headerRefs.current);
-    // callback gets called everytime there is a change in intersection either from 0 or 1
+    // when the component mounts we want to add an active class to the activeIndexRef element in categoriesRef
+    // The initial state will be 0 when this runs for the first time but if this useEffect function runs again
+    // when the user changes the screen, the activeIndexRef won't be 0, it will be the current value when the screen changed.
+    categoriesRefs.current[activeIndexRef.current].classList.add(
+      styles['active']
+    );
+
+    // this takes a callback function and options
+    // the callback gets called everytime something you are observing changes
+    // the callback function takes in a list of entries
+    // and the list of entries are all the things that have changed, that have intersected or unintersected.
     const observer = new IntersectionObserver(
       (entries) => {
         // current index must be memoized or tracked outside of function for comparison
@@ -58,34 +46,34 @@ export default function MenuPageBody() {
         const aboveIndeces = [];
         const belowIndeces = [];
 
-        // usually you are dealing with one at a time but if like 3 elments pop up in a fast time then this will loop through all 5
+        // So if you scroll really slowly, you don't need a for loop because it'll register 1 element or a list of 1 element
+        // however if you scroll really fast or you jump to a section of a page without scrolling and you have 3 elements on your screen,
+        // we'll need to check all 3 of those elements and we can do some logic on all 3 with a list.
         entries.forEach((element) => {
-          const boundingClientRectY =
-            typeof element.boundingClientRect.y !== 'undefined'
-              ? element.boundingClientRect.y
-              : element.boundingClientRect.top;
-          const rootBoundsY =
-            typeof element.rootBounds.y !== 'undefined'
-              ? element.rootBounds.y
-              : element.rootBounds.top;
-          const isAbove = boundingClientRectY < rootBoundsY;
-          // get index of intersecting element from DOM attribute
+          // position of the top of the element as the element changes to intersect the viewport or leave the viewport
+          const boundingClientRectTop = element.boundingClientRect.top;
+
+          // position of the top of the viewport. This will be the same value for all elements
+          // It will use the value in rootMargin, defined in the options argument for IntersectionObserver below
+          const rootBoundsTop = element.rootBounds.top;
+
+          // checks if intersecting element is above the viewpor
+          const isAbove = boundingClientRectTop < rootBoundsTop;
+
+          // get index of intersecting element from custom created DOM attribute: 'data-index'
           const intersectingElemIdx = parseInt(
             element.target.getAttribute('data-index')
           );
 
-          // record index as either above or below current index
+          // if the element is above, add index to above array
+          // if the element is below, add index to below array
           if (isAbove) aboveIndeces.push(intersectingElemIdx);
           else belowIndeces.push(intersectingElemIdx);
-          //console.log("hi" + entry.intersectionRatio + " " + entry.target)
-          //sideBar.current.querySelector('a.active').classList.remove("active");
-          //sideBar.current.querySelector('a[href$=#' + id + ']').classList.add('active');
-
-          //console.log(menuCategories)
         });
 
         // determine min and max fired indeces values (support for multiple elements firing at once)
-
+        // gets the min value of the below array and max value of max array if applicable
+        // we only care about the closest index value to the intersecting element from the top and bottom
         const minIndex = Math.min.apply(Math, belowIndeces);
         const maxIndex = Math.max.apply(Math, aboveIndeces);
 
@@ -100,61 +88,59 @@ export default function MenuPageBody() {
           // scrolling up - set to minimum of fired indeces
           localActiveIndex = minIndex - 1 >= 0 ? minIndex - 1 : 0;
         }
-        //console.log(activeSlideRef.current.classList)
 
+        // if the localActiveIndex we calculate here is different than the current Active Index then we change the active class
         if (localActiveIndex !== activeIndexRef.current) {
-          console.log('im in setstate');
-          activeSlideRef.current.classList.remove(styles['active']);
-          //activeSlideRef.current.classList.remove("active")
+          categoriesRefs.current[activeIndexRef.current].classList.remove(
+            styles['active']
+          );
+          // we change the current active index before we add to it after
           setActiveIndex(localActiveIndex);
-          activeSlideRef.current.classList.add(styles['active']);
-          //activeSlideRef.current.classList.add("active")
+          categoriesRefs.current[activeIndexRef.current].classList.add(
+            styles['active']
+
+          );
+
         }
       },
       {
         // use -100px for when the navbar is placed, it'll check it earlier
         // 85
-        threshold: 1.0,
-        rootMargin:
-          screenSizeBoolean || isItPhone
-            ? '-100px 0px 0px 0px'
-            : '-40px 0px 0px 0px',
+        root: null, // by default the root will be the viewport
+        // first checks if on desktop or mobile before setting the viewport margins
+        // because the mobile viewport has the menu bar on top so we need to increase the viewport.
+        // So Positive margin values will EXTEND the viewport like stretch it more above and below out of view
+        // So entries will intersect earlier. Negative values will SHRINK the viewport.
+        rootMargin: isItPhone ? '-100px 0px 0px 0px' : '-40px 0px 0px 0px', 
+        threshold: 1.0, // the percentage of the element to be shown for it to be counted as "intersecting"
       }
     );
 
     //const menuSections = menuRef.current.querySelectorAll(".menupage-body h2")
     // we need to find another way for this, this won't work if i put in a classname
+    // get the list of header elements
+    // we are not manipulating the DOM with this function so it is ok to use
     const menuSections = menuRef.current.querySelectorAll('h2');
-    console.log('printing menusections');
-    console.log(menuSections);
 
+    // calls the observe method with each of the elements to start observing them.
     menuSections.forEach((card) => {
       observer.observe(card);
     });
-  }, [screenSizeBoolean]);
+  }, [isItPhone]);
+  // we will need to rerun the useEffect whenever isItPhone changes
+  // because it is now either desktop or mobile and we need a new Intersection Observer object
+  // to have new rootMargins that match the new screen size viewport
 
-  //maybe stop the first render ask stack overflow
-  //This may be firing when screen is big and it doesnt have scrollbar yet but it doesnt break the code
+  // we will optimize this later to only run if isItPhone is true
+  // we could maybe just use an if statement
   useEffect(() => {
-    //categoriesRefs.current[activeIndex].scrollIntoView({behavior: "smooth", inline: "start"})
-    /*
-    console.log("what is this " + categoriesRefs.current[activeIndex])
-    if(categoriesRefs.current[activeIndex] !== undefined)
-    {
-      sideBar.current.scrollTo({left: categoriesRefs.current[activeIndex].offsetLeft, behavior: "smooth"})
-      console.log("heiiiiiiiiiiii//////////////////")
-      console.log(categoriesRefs.current[activeIndex])
-    }
-    */
-    if (activeSlideRef.current) {
-      console.log('im being trigereddddddddddddddddddddddd');
-      console.log(activeSlideRef.current);
-      //activeSlideRef.current.scrollIntoView({behavior: "smooth"})
-      // 15 + 63, 63 is button length 20 is for margins
-      console.log('guy');
-      console.log(activeSlideRef.current.offsetLeft);
+    // only thing i may worry about is whether to check if categoriesRefs.current[activeIndexRef.current]
+    // is null or undefined on first cast with if statement
+    if (isItPhone) {
+      // scrollTo scrolls to a particular set of coordinates inside an element
       sideBar.current.scrollTo({
-        left: activeSlideRef.current.offsetLeft - 78,
+        // the 78 accounts for the categories bar mobile button width which is 73 + 5 more for buffer room
+        left: categoriesRefs.current[activeIndexRef.current].offsetLeft - 78,
         behavior: 'smooth',
       });
     }
@@ -163,18 +149,17 @@ export default function MenuPageBody() {
   //const menuCategories = menuRef.current.querySelectorAll(".table-container")
 
   return (
-    <div class={styles['menupage-container']}>
+    <div className={styles['menupage-container']}>
       <SideBar
         sideBar={sideBar}
         headerRefs={headerRefs}
         activeIndex={activeIndex}
-        activeSlideRef={activeSlideRef}
         categoriesRefs={categoriesRefs}
       />
       <Menu menuRef={menuRef} headerRefs={headerRefs} />
       {/*Invisible buffer element so I can center it as if there were 3 elements with the 2 side by side equal widths*/}
       <div
-        class={styles['menupagebody-filler']}
+        className={styles['menupagebody-filler']}
         style={{ width: '286px', flexShrink: 100 }}
       ></div>
     </div>
