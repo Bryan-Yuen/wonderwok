@@ -11,13 +11,13 @@ export default function NavBar() {
   // USE SEPERATE LINKS FOR MENU BAR AND NAV BAR
   // JUST HIDE THE NAV BAR LINKS WITH MEDIA QUERIES
   return (
-    <nav class={styles["navbar-container"]}>
+    <nav className={styles["navbar-container"]}>
       <header>
         <h1>
           <a href="/">Wonder Wok</a>
         </h1>
       </header>
-      <ul class={styles["nav-links"]}>
+      <ul className={styles["nav-links"]}>
         <li>
           <a href="/">Home</a>
         </li>
@@ -31,14 +31,14 @@ export default function NavBar() {
           <a href="/About">About</a>
         </li>
       </ul>
-      <button class={styles["nav-button"]} onClick={expand}>
+      <button className={styles["nav-button"]} onClick={expand}>
         <FontAwesomeIcon icon="fa-solid fa-bars" size="3x" />
       </button>
       {/*Invisible buffer element so I can center it as if there were 3 elements with the 2 side by side equal widths*/}
-      <div class={styles["nav-filler"]}></div>
+      <div className={styles["nav-filler"]}></div>
       {/*This is the accordian "modal" mobile navbar // good place to portal*/}
-      <div class={styles["mobile-nav-links"]} style={{ width: width }}>
-        <button class={styles["close-button"]} onClick={close}>
+      <div className={styles["mobile-nav-links"]} style={{ width: width }}>
+        <button className={styles["close-button"]} onClick={close}>
           <FontAwesomeIcon icon="fa-solid fa-x" size="xs" />
         </button>
         <ul>
