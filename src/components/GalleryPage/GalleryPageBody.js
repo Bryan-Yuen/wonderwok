@@ -6,7 +6,7 @@ export default function GalleryPageBody() {
   const [modalImage, setModalImage] = useState("img1.jpg");
   const [display, setDisplay] = useState("none");
 
-  const pictureNames = ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg"];
+  const pictureNames = ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg", "img6.jpg", "img7.jpg", "img8.jpg"];
 
   const selectImage = (img) => {
     setModalImage(img);
