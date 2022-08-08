@@ -19,6 +19,7 @@ export default function HomePageBody() {
     setSlides(slidesList)
   }, [])
 
+  // this is a useful trick to not use the first render which will use the undefined state and only use the second render
   useEffect(() => {
     if(slides)
       window.setInterval(() => showSlide("next"), 5000)
