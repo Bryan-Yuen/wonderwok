@@ -12,6 +12,7 @@ export default function HomePageBody() {
   activeSlideIndexRef.current = slideIndex
   const pictureContainerRef = useRef()
   const [slides, setSlides] = useState()
+  const [slideShowInterval, setSlideShowInterval] = useState()
 
   useEffect(() => {
     const slidesList = pictureContainerRef.current.querySelectorAll('picture')
@@ -19,14 +20,19 @@ export default function HomePageBody() {
     setSlides(slidesList)
   }, [])
 
+  // note setInterval with clearInterval and setTimeout and clearTimeout both work but I like setTImeout better
   useEffect(() => {
     if(slides)
-      window.setInterval(() => showSlide("next"), 5000)
+      setTimeout(() => showSlide("next"), 5000)
   }, [slides])
+  
 
-  const showSlide = (action) => {
+  const showSlide = (action, type = "automatic") => {   
+    if (type == "manual")
+      clearTimeout(slideShowInterval)
+
     slides[activeSlideIndexRef.current].classList.remove(styles['active'])
-    //console.log(slides[slideIndex])
+
     switch (action) {
       case '0':
         setSlideIndex(0)
@@ -65,6 +71,7 @@ export default function HomePageBody() {
       default:
         break;
     }
+    setSlideShowInterval(setTimeout(() => showSlide("next"), 5000))
   };
 
   return (
@@ -84,17 +91,17 @@ export default function HomePageBody() {
       <a className={styles['menu-button']} href="Menu">
         View Menu
       </a>
-      <a className={styles['prev']} onClick={() => showSlide('prev')}>
+      <a className={styles['prev']} onClick={() => showSlide('prev', "manual")}>
         &#10094;
       </a>
-      <a className={styles['next']} onClick={() => showSlide('next')}>
+      <a className={styles['next']} onClick={() => showSlide('next', "manual")}>
         &#10095;
       </a>
       <div className={styles['dots-container']}>
-        <span className={styles['dot']} onClick={() => showSlide('0')}></span>
-        <span className={styles['dot']} onClick={() => showSlide('1')}></span>
-        <span className={styles['dot']} onClick={() => showSlide('2')}></span>
-        <span className={styles['dot']} onClick={() => showSlide('3')}></span>
+        <span className={styles['dot']} onClick={() => showSlide('0', "manual")}></span>
+        <span className={styles['dot']} onClick={() => showSlide('1', "manual")}></span>
+        <span className={styles['dot']} onClick={() => showSlide('2', "manual")}></span>
+        <span className={styles['dot']} onClick={() => showSlide('3', "manual")}></span>
       </div>
     </section>
   );
