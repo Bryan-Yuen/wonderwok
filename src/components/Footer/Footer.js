@@ -27,6 +27,7 @@ export default function Footer() {
           Miami Gardens, FL 33169
         </p>
       </div>
+      <div>© 2022 Wonder Wok</div>
     </footer>
   );
 }

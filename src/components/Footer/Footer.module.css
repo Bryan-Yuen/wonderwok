@@ -1,9 +1,12 @@
 .footer-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   background-color: rgb(41, 38, 38);
   min-height: 120px;
+  color:white;
+  padding-bottom:20px;
 }
 
 /* this is a classic trick to group the 3 elements together to get a center point
@@ -15,7 +18,6 @@ i just pass the flex down so I can change it to block later.*/
 }
 
 .footer-container p {
-  color: white;
   line-height: 1.5;
   margin: 20px 50px;
 }
