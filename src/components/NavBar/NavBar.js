@@ -14,7 +14,7 @@ export default function NavBar() {
     <nav className={styles["navbar-container"]}>
       <header>
         <h1>
-          <img width="50px" src="/wok.png" className={styles["wok"]}/>
+          <img width="50px" src="/wok.png" alt="wok" className={styles["wok"]}/>
           <a href="/">Wonder Wok</a>
         </h1>
       </header>
