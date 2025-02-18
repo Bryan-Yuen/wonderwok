@@ -5,7 +5,7 @@ import styles from './MenuPageBody.module.css';
 export default function Menu(props) {
   return (
     <div className={styles['menupage-body']} ref={props.menuRef}>
-      <h1>Menu</h1>
+      <h1 className="text-[30px] font-semibold">Menu</h1>
 
       <h2
         id="appetizers"
