@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     // This is not redundant div containers, I need 2 flex so I can changethe child div to display block later
     <footer className="flex flex-col justify-center items-center bg-footer-background-color text-white min-h-footer-min-height py-[20px]">
-      <div className="block min-[815px]:flex">
+      <div className="block tablet:flex">
         <div className="py-[10px] px-[50px]">
           <b>Phone Number</b>
           <br></br>
