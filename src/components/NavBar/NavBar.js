@@ -13,10 +13,10 @@ export default function NavBar() {
   return (
     <nav className={styles["navbar-container"]}>
       <header>
-        <h1>
+        <div className="flex items-center text-white text-2xl font-bold">
           <img width="50px" src="/wok.png" alt="wok" className={styles["wok"]}/>
           <a href="/">Wonder Wok</a>
-        </h1>
+        </div>
       </header>
       <ul className={styles["nav-links"]}>
         <li>

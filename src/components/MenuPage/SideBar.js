@@ -31,7 +31,7 @@ export default function SideBar(props) {
           <button className={styles["sideBar-button"]} onClick={() => setWidth("100%")}>
               <FontAwesomeIcon icon="fa-solid fa-bars" size="2x"/>
           </button>
-          <h2>Categories</h2>
+          <h2 className="text-2xl">Categories</h2>
           <div className={styles["topBarList"]} ref={props.sideBar}>
             <ul>
             {categories.map((cat, i) =>

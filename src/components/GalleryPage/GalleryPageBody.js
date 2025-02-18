@@ -41,7 +41,7 @@ export default function GalleryPageBody() {
 
   return (
     <>
-      <h1 className="text-center py-[25px]">Gallery</h1>
+      <h1 className="text-center py-[25px] text-3xl font-bold">Gallery</h1>
       <div className="grid grid-cols-[auto] gap-[50px] justify-center pb-[25px] mx-[25px] tablet:grid-cols-[repeat(2,minmax(300px,400px))]">
         {pictureNames.map((name) => (
           <img
